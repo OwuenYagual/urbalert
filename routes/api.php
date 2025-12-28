@@ -40,4 +40,5 @@ Route::get('/ping', function () {
 Route::get('/denuncias', [DenunciaController::class, 'index']);
 Route::get('/denuncias/{id}', [DenunciaController::class, 'show']);
 Route::post('/denuncias', [DenunciaController::class, 'store']);
+Route::patch('/denuncias/{id}/estado', [DenunciaController::class, 'updateEstado']);
 Route::delete('/denuncias/{id}', [DenunciaController::class, 'destroy']);

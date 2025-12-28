@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreDenunciaRequest;
+use App\Http\Requests\UpdateDenunciaEstadoRequest;
 use App\Models\Denuncia;
 use Illuminate\Http\JsonResponse;
 
@@ -61,6 +62,25 @@ class DenunciaController extends Controller
         }
 
         return response()->json([
+            'data' => $denuncia
+        ], 200);
+    }
+
+    public function updateEstado(UpdateDenunciaEstadoRequest $request, int $id): JsonResponse
+    {
+        $denuncia = Denuncia::find($id);
+
+        if (!$denuncia) {
+            return response()->json([
+                'message' => 'Denuncia no encontrada.'
+            ], 404);
+        }
+
+        $denuncia->estado = $request->estado;
+        $denuncia->save();
+
+        return response()->json([
+            'message' => 'Estado actualizado correctamente.',
             'data' => $denuncia
         ], 200);
     }
