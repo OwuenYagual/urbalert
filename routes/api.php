@@ -37,6 +37,7 @@ Route::get('/ping', function () {
  * Método: POST
  * URL: /api/denuncias
  */
+Route::get('/denuncias', [DenunciaController::class, 'index']);
+Route::get('/denuncias/{id}', [DenunciaController::class, 'show']);
 Route::post('/denuncias', [DenunciaController::class, 'store']);
 Route::delete('/denuncias/{id}', [DenunciaController::class, 'destroy']);
-Route::get('/denuncias', [DenunciaController::class, 'index']);

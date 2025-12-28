@@ -50,5 +50,19 @@ class DenunciaController extends Controller
         ], 200);
     }
 
+    public function show(int $id): JsonResponse
+    {
+        $denuncia = Denuncia::find($id);
+
+        if (!$denuncia) {
+            return response()->json([
+                'message' => 'Denuncia no encontrada.'
+            ], 404);
+        }
+
+        return response()->json([
+            'data' => $denuncia
+        ], 200);
+    }
 
 }
