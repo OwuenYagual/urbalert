@@ -8,7 +8,7 @@ use Illuminate\Http\JsonResponse;
 
 class DenunciaController extends Controller
 {
-    public function store(StoreDenunciaRequest $request): JsonResponse
+    public function store(StoreDenunciaRequest $request)
     {
         $denuncia = Denuncia::create([
             'titulo' => $request->titulo,
@@ -23,4 +23,5 @@ class DenunciaController extends Controller
             'data' => $denuncia,
         ], 201);
     }
+
 }
