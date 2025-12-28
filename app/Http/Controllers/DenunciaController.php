@@ -33,4 +33,22 @@ class DenunciaController extends Controller
         ],200);
     }
 
+    public function destroy(int $id): JsonResponse
+    {
+        $denuncia = Denuncia::find($id);
+
+        if (!$denuncia) {
+            return response()->json([
+                'message' => 'Denuncia no encontrada.'
+            ], 404);
+        }
+
+        $denuncia->delete();
+
+        return response()->json([
+            'message' => 'Denuncia eliminada correctamente.'
+        ], 200);
+    }
+
+
 }
