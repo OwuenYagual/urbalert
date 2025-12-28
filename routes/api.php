@@ -38,3 +38,4 @@ Route::get('/ping', function () {
  * URL: /api/denuncias
  */
 Route::post('/denuncias', [DenunciaController::class, 'store']);
+Route::get('/denuncias', [DenunciaController::class, 'index']);

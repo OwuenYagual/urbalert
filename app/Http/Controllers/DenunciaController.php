@@ -24,4 +24,13 @@ class DenunciaController extends Controller
         ], 201);
     }
 
+    public function index(): JsonResponse 
+    {
+        $denuncias = Denuncia::orderBy('created_at', 'desc')->get();
+
+        return response()->json([
+            'data' => $denuncias
+        ],200);
+    }
+
 }
