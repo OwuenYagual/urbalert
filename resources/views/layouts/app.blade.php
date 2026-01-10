@@ -13,7 +13,11 @@
 <body>
 
 <header>
-    <h1>Urbalert</h1>
+    <h1>
+        <a href="/" style="color: white; text-decoration: none;">
+            Urbalert
+        </a>
+    </h1>
     <nav>
         <a href="/">Denuncias</a>
         <a href="/denuncias/crear">Registrar denuncia</a>
