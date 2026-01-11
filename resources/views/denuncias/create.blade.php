@@ -1,11 +1,21 @@
-@extends('layouts.app')
+//@extends('layouts.app')
 
 @section('title', 'Registrar denuncia')
 
 @section('content')
     <h2>Registrar nueva denuncia</h2>
 
-    <form id="denuncia-form" style="max-width: 600px; margin-top: 16px;">
+    <!-- Botón para abrir/ocultar la sección de denuncias -->
+    <div class="text-center py-6">
+        <button id="btn-denuncias" class="bg-red-600 text-white px-6 py-3 rounded hover:bg-red-700 transition">
+            Mostrar/Ocultar formulario
+        </button>
+    </div>
+
+    <!-- Sección de denuncias (oculta al inicio) -->
+    <section id="denuncias" class="py-6 bg-gray-50 text-center">
+
+    <form id="denuncia-form" style="max-width: 600px; margin: 0 auto; margin-top: 16px; text-align: left;">
         <div style="margin-bottom: 12px;">
             <label for="titulo">Título</label><br>
             <input
@@ -63,4 +73,21 @@
     </form>
 
     <div id="mensaje" style="margin-top: 16px;"></div>
+
+    </section>
+
+    <script>
+        // Mostrar/ocultar sección de denuncias desde la propia vista
+        (function(){
+            const btn = document.getElementById('btn-denuncias');
+            const section = document.getElementById('denuncias');
+            if(!btn || !section) return;
+            // por defecto ocultar la sección si está dentro de otra página
+            section.classList.add('hidden');
+            btn.addEventListener('click', () => {
+                section.classList.toggle('hidden');
+                if(!section.classList.contains('hidden')) section.scrollIntoView({ behavior: 'smooth' });
+            });
+        })();
+    </script>
 @endsection

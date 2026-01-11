@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Denuncia Segura — Urbalert</title>
+
+    <!-- Tailwind CDN para preview rápido -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        html, body { height: 100%; }
+        body { display: flex; flex-direction: column; min-height: 100vh; }
+        main { flex: 1 0 auto; }
+        footer { flex-shrink: 0; }
+
+        /* Hero background using imagen fondo_com con overlay semitransparente */
+        #inicio .hero {
+            background-image: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), url('/images/FOndo_com.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+    </style>
+    <!-- Assets del proyecto (si existen en public/build) -->
+    <link rel="stylesheet" href="/build/assets/app-DM0mDv2a.css" />
+    <script src="/build/assets/app-2muEoyII.js" defer></script>
+
+</head>
+
+<body class="font-sans bg-gray-50 min-h-screen flex flex-col">
+
+    <!-- NAV (fusionado: logo + enlaces del layout) -->
+    <nav class="bg-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-24">
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="/" class="flex items-center">
+                        <img src="/images/logo.png" alt="Denuncia Segura" class="h-16 mr-3" onerror="this.style.display='none'" />
+                        <span class="text-xl font-semibold">Urbalert</span>
+                    </a>
+                </div>
+                <div class="flex items-center md:hidden">
+                    <button onclick="toggleMenu()" class="text-gray-700 hover:text-red-600 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+                <div id="desktop-menu" class="hidden md:flex space-x-4 items-center">
+                    <a href="/listar_denuncias.html" class="text-gray-700 hover:text-red-600">Denuncias</a>
+                    <a href="/registrar_denuncia.html" class="text-gray-700 hover:text-red-600">Registrar denuncia</a>
+                    <a href="/preview.html" class="text-gray-700 hover:text-red-600">Inicio</a>
+                    <a href="#sobre" class="text-gray-700 hover:text-red-600">Sobre Nosotros</a>
+                    <a href="#contacto" class="text-gray-700 hover:text-red-600">Contacto</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section id="inicio">
+        <div class="hero h-screen flex flex-col justify-center items-center">
+            <h1 class="text-white text-6xl font-bold uppercase mb-4 opacity-0 translate-y-10 transition-all duration-1000" id="titulo">Denuncia Segura</h1>
+            <h2 class="text-red-200 text-2xl opacity-0 -translate-y-10 transition-all duration-1000 delay-500" id="subtitulo">Tu voz, nos ayuda a construir un mejor mañana</h2>
+        </div>
+    </section>
+
+    <script>
+        window.addEventListener('load', () => {
+            const t = document.getElementById('titulo');
+            const s = document.getElementById('subtitulo');
+            if (t) {
+                t.classList.remove('opacity-0', 'translate-y-10');
+                t.classList.add('opacity-100', 'translate-y-0');
+            }
+            if (s) {
+                s.classList.remove('opacity-0', '-translate-y-10');
+                s.classList.add('opacity-100', '-translate-y-0');
+            }
+        });
+
+        function toggleMenu(){
+            const m = document.getElementById('desktop-menu');
+            if(!m) return;
+            m.classList.toggle('hidden');
+        }
+    </script>
+
+    <!-- SOBRE NOSOTROS -->
+    <section id="sobre" class="text-center py-16 bg-white">
+        <div class="max-w-4xl mx-auto px-4 space-y-6">
+            <h2 class="text-3xl font-bold text-[#020728]">Sobre Denuncia Segura</h2>
+            <p class="text-lg text-gray-700">
+                Somos una plataforma que garantiza confidencialidad y seguridad a todas las personas que deseen reportar situaciones de riesgo o irregularidades.
+                Nos preocupamos por que tu voz sea escuchada y tu identidad protegida.
+            </p>
+            <p class="text-lg text-gray-700">
+                Nuestro equipo está compuesto por profesionales comprometidos con la transparencia, la ética y la protección de los derechos de todos.
+            </p>
+        </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section id="contacto" class="py-16 bg-white text-center">
+        <h2 class="text-3xl font-bold mb-8 text-[#020728]">Contacto / Autoridades</h2>
+
+        <div class="max-w-3xl mx-auto grid gap-4 md:grid-cols-3 px-4">
+            <div class="p-4 bg-gray-50 rounded shadow">
+                <p class="font-bold">Oficina de Seguridad Ciudadana</p>
+                <p class="text-sm text-gray-600">Coordinador: Juan Pérez</p>
+                <p class="mt-2"><strong>Tel:</strong> <a href="tel:+34600000001">+34 600 000 001</a></p>
+                <p><strong>Email:</strong> <a href="mailto:seguridad@urbalert.local">seguridad@urbalert.local</a></p>
+            </div>
+
+            <div class="p-4 bg-gray-50 rounded shadow">
+                <p class="font-bold">Unidad de Denuncias</p>
+                <p class="text-sm text-gray-600">Encargada: María González</p>
+                <p class="mt-2"><strong>Tel:</strong> <a href="tel:+34600000002">+34 600 000 002</a></p>
+                <p><strong>Email:</strong> <a href="mailto:denuncias@urbalert.local">denuncias@urbalert.local</a></p>
+            </div>
+
+            <div class="p-4 bg-gray-50 rounded shadow">
+                <p class="font-bold">Línea de Atención</p>
+                <p class="text-sm text-gray-600">Atención 24/7</p>
+                <p class="mt-2"><strong>Tel:</strong> <a href="tel:+34600000003">+34 600 000 003</a></p>
+                <p><strong>Email:</strong> <a href="mailto:atencion@urbalert.local">atencion@urbalert.local</a></p>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-red-600 text-white py-4 text-center">
+        © 2026 Denuncia Segura - Todos los derechos reservados
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Listado de denuncias — Urbalert</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/build/assets/app-DM0mDv2a.css" />
+  <style>
+    html, body { height: 100%; }
+    body { display: flex; flex-direction: column; min-height: 100vh; }
+    main { flex: 1 0 auto; }
+    footer { flex-shrink: 0; }
+  </style>
+</head>
+<body class="font-sans bg-gray-50">
+    <!-- NAV (fusionado: logo + enlaces del layout) -->
+    <nav class="bg-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-24">
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="/" class="flex items-center">
+                      <img src="/images/logo.png" alt="Denuncia Segura" class="h-16 mr-3" onerror="this.style.display='none'" />
+                      <span class="text-xl font-semibold">Urbalert</span>
+                    </a>
+                </div>
+                <div class="flex items-center md:hidden">
+                    <button onclick="toggleMenu()" class="text-gray-700 hover:text-red-600 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+                <div id="desktop-menu" class="hidden md:flex space-x-4 items-center">
+                  <a href="/listar_denuncias.html" class="text-gray-700 hover:text-red-600">Denuncias</a>
+                  <a href="/registrar_denuncia.html" class="text-gray-700 hover:text-red-600">Registrar denuncia</a>
+                  <a href="/preview.html" class="text-gray-700 hover:text-red-600">Inicio</a>
+                  <a href="#sobre" class="text-gray-700 hover:text-red-600">Sobre Nosotros</a>
+                  <a href="#contacto" class="text-gray-700 hover:text-red-600">Contacto</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+  <main class="max-w-5xl mx-auto p-6">
+    <h1 class="text-2xl font-bold mb-4">Denuncias registradas</h1>
+
+    <div class="bg-white p-4 rounded shadow">
+      <table class="w-full table-auto border-collapse">
+        <thead>
+          <tr class="bg-gray-100 text-left">
+            <th class="px-3 py-2">Título</th>
+            <th class="px-3 py-2">Categoría</th>
+            <th class="px-3 py-2">Ubicación</th>
+            <th class="px-3 py-2">Fecha</th>
+            <th class="px-3 py-2">Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="tbody-denuncias">
+          <tr><td colspan="5" class="p-4 text-center text-gray-500">Cargando...</td></tr>
+        </tbody>
+      </table>
+
+      <div class="mt-4 text-right">
+        <button id="vaciar-btn" class="bg-red-600 text-white px-3 py-2 rounded">Eliminar todo</button>
+      </div>
+    </div>
+    <!-- CONTACTO -->
+    <section id="contacto" class="py-12 bg-white text-center mt-8">
+      <h2 class="text-2xl font-bold mb-6 text-[#020728]">Contacto / Autoridades</h2>
+      <div class="max-w-4xl mx-auto grid gap-4 md:grid-cols-3 px-4">
+        <div class="p-4 bg-gray-50 rounded shadow">
+          <p class="font-bold">Oficina de Seguridad Ciudadana</p>
+          <p class="text-sm text-gray-600">Coordinador: Juan Pérez</p>
+          <p class="mt-2"><strong>Tel:</strong> <a href="tel:+34600000001">+34 600 000 001</a></p>
+          <p><strong>Email:</strong> <a href="mailto:seguridad@urbalert.local">seguridad@urbalert.local</a></p>
+        </div>
+        <div class="p-4 bg-gray-50 rounded shadow">
+          <p class="font-bold">Unidad de Denuncias</p>
+          <p class="text-sm text-gray-600">Encargada: María González</p>
+          <p class="mt-2"><strong>Tel:</strong> <a href="tel:+34600000002">+34 600 000 002</a></p>
+          <p><strong>Email:</strong> <a href="mailto:denuncias@urbalert.local">denuncias@urbalert.local</a></p>
+        </div>
+        <div class="p-4 bg-gray-50 rounded shadow">
+          <p class="font-bold">Línea de Atención</p>
+          <p class="text-sm text-gray-600">Atención 24/7</p>
+          <p class="mt-2"><strong>Tel:</strong> <a href="tel:+34600000003">+34 600 000 003</a></p>
+          <p><strong>Email:</strong> <a href="mailto:atencion@urbalert.local">atencion@urbalert.local</a></p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="text-center py-6 text-white bg-red-600">© 2026 Urbalert</footer>
+
+  <script>
+    const denunciasIniciales = [
+      { nombre: "Anónimo", categoria: "Acoso", comentario: "Hay acoso en la zona de trabajo.", ubicacion: "Sin especificar", fecha: "2024-12-01T10:00:00Z" },
+      { nombre: "María L.", categoria: "Corrupción", comentario: "Se detectó corrupción en la administración.", ubicacion: "Ayuntamiento", fecha: "2024-12-05T12:00:00Z" }
+    ];
+
+    function cargar(){
+      const tbody = document.getElementById('tbody-denuncias');
+      tbody.innerHTML = '';
+      const guardadas = JSON.parse(localStorage.getItem('denuncias') || '[]');
+      const todas = [...denunciasIniciales, ...guardadas];
+
+      if(todas.length === 0){
+        tbody.innerHTML = '<tr><td colspan="5" class="p-4 text-center text-gray-500">No hay denuncias registradas.</td></tr>';
+        return;
+      }
+
+      todas.forEach((d, idx) => {
+        const fecha = d.fecha ? new Date(d.fecha).toLocaleString() : '';
+        const tr = document.createElement('tr');
+        tr.className = 'border-t';
+        tr.innerHTML = `
+          <td class="px-3 py-2">${d.nombre || d.titulo || 'Anónimo'}</td>
+          <td class="px-3 py-2">${d.categoria || ''}</td>
+          <td class="px-3 py-2">${d.ubicacion || ''}</td>
+          <td class="px-3 py-2">${fecha}</td>
+          <td class="px-3 py-2">
+            <button class="ver-btn bg-blue-600 text-white px-2 py-1 rounded" data-idx="${idx}">Ver</button>
+            <button class="del-btn bg-gray-500 text-white px-2 py-1 rounded ml-2" data-idx="${idx}">Eliminar</button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      // attach handlers
+      document.querySelectorAll('.del-btn').forEach(b=> b.addEventListener('click', eliminar));
+      document.querySelectorAll('.ver-btn').forEach(b=> b.addEventListener('click', ver));
+    }
+
+    function eliminar(e){
+      const idx = Number(e.currentTarget.dataset.idx);
+      // las iniciales no se eliminan; solo las guardadas en localStorage
+      const guardadas = JSON.parse(localStorage.getItem('denuncias') || '[]');
+      // la lista que mostramos es [iniciales..., guardadas...]
+      const offset = denunciasIniciales.length;
+      if(idx < offset){
+        alert('Esta denuncia es de ejemplo y no puede eliminarse desde aquí.');
+        return;
+      }
+      const pos = idx - offset;
+      guardadas.splice(pos,1);
+      localStorage.setItem('denuncias', JSON.stringify(guardadas));
+      cargar();
+    }
+
+    function ver(e){
+      const idx = Number(e.currentTarget.dataset.idx);
+      const guardadas = JSON.parse(localStorage.getItem('denuncias') || '[]');
+      const todas = [...denunciasIniciales, ...guardadas];
+      const d = todas[idx];
+      alert(`Título: ${d.nombre||d.titulo||'Anónimo'}\nCategoría: ${d.categoria}\nUbicación: ${d.ubicacion||''}\n\n${d.comentario||d.descripcion||''}`);
+    }
+
+    document.getElementById('vaciar-btn').addEventListener('click', ()=>{
+      if(!confirm('Eliminar todas las denuncias guardadas localmente?')) return;
+      localStorage.removeItem('denuncias');
+      cargar();
+    });
+
+    document.addEventListener('DOMContentLoaded', cargar);
+  </script>
+</body>
+</html>

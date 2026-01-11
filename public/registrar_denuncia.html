@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Registrar denuncia — Urbalert</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/build/assets/app-DM0mDv2a.css" />
+  <style>
+    html, body { height: 100%; }
+    body { display: flex; flex-direction: column; min-height: 100vh; }
+    main { flex: 1 0 auto; }
+    footer { flex-shrink: 0; }
+  </style>
+</head>
+<body class="font-sans bg-gray-50">
+  <!-- NAV (fusionado: logo + enlaces del layout) -->
+    <nav class="bg-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-24">
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="/" class="flex items-center">
+                      <img src="/images/logo.png" alt="Denuncia Segura" class="h-16 mr-3" onerror="this.style.display='none'" />
+                      <span class="text-xl font-semibold">Urbalert</span>
+                    </a>
+                </div>
+                <div class="flex items-center md:hidden">
+                    <button onclick="toggleMenu()" class="text-gray-700 hover:text-red-600 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+                <div id="desktop-menu" class="hidden md:flex space-x-4 items-center">
+                  <a href="/listar_denuncias.html" class="text-gray-700 hover:text-red-600">Denuncias</a>
+                  <a href="/registrar_denuncia.html" class="text-gray-700 hover:text-red-600">Registrar denuncia</a>
+                  <a href="/preview.html" class="text-gray-700 hover:text-red-600">Inicio</a>
+                  <a href="#sobre" class="text-gray-700 hover:text-red-600">Sobre Nosotros</a>
+                  <a href="#contacto" class="text-gray-700 hover:text-red-600">Contacto</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+  <main class="max-w-3xl mx-auto p-6">
+    <h1 class="text-2xl font-bold mb-4">Registrar nueva denuncia</h1>
+
+    <div class="bg-white p-6 rounded shadow">
+      <form id="form-denuncia" class="space-y-4">
+        <input type="text" id="titulo" name="titulo" placeholder="Título (opcional)" class="w-full p-3 border rounded" />
+        <textarea id="descripcion" name="descripcion" placeholder="Descripción de la situación" required class="w-full p-3 border rounded" rows="5"></textarea>
+        <select id="categoria" name="categoria" required class="w-full p-3 border rounded">
+          <option value="">Seleccione una categoría</option>
+          <option value="Salud pública">Salud pública</option>
+          <option value="Alumbrado">Alumbrado</option>
+          <option value="Seguridad">Seguridad</option>
+          <option value="Infraestructura">Infraestructura</option>
+          <option value="Otros">Otros</option>
+        </select>
+        <input type="text" id="ubicacion" name="ubicacion" placeholder="Ubicación" class="w-full p-3 border rounded" />
+
+        <div class="flex gap-2">
+          <button type="submit" class="bg-red-600 text-white px-4 py-2 rounded">Enviar denuncia</button>
+          <a href="/" class="bg-gray-500 text-white px-4 py-2 rounded">Cancelar</a>
+        </div>
+      </form>
+
+      <div id="mensaje" class="mt-4 text-green-600"></div>
+
+      <h2 class="text-xl font-semibold mt-8 mb-4">Denuncias recientes</h2>
+      <div id="lista-denuncias" class="space-y-4"></div>
+    </div>
+    <!-- CONTACTO -->
+    <section id="contacto" class="py-16 bg-white text-center">
+        <h2 class="text-3xl font-bold mb-8 text-[#020728]">Contacto / Autoridades</h2>
+
+        <div class="max-w-3xl mx-auto grid gap-4 md:grid-cols-3 px-4">
+            <div class="p-4 bg-gray-50 rounded shadow">
+                <p class="font-bold">Oficina de Seguridad Ciudadana</p>
+                <p class="text-sm text-gray-600">Coordinador: Juan Pérez</p>
+                <p class="mt-2"><strong>Tel:</strong> <a href="tel:+34600000001">+34 600 000 001</a></p>
+                <p><strong>Email:</strong> <a href="mailto:seguridad@urbalert.local">seguridad@urbalert.local</a></p>
+            </div>
+
+            <div class="p-4 bg-gray-50 rounded shadow">
+                <p class="font-bold">Unidad de Denuncias</p>
+                <p class="text-sm text-gray-600">Encargada: María González</p>
+                <p class="mt-2"><strong>Tel:</strong> <a href="tel:+34600000002">+34 600 000 002</a></p>
+                <p><strong>Email:</strong> <a href="mailto:denuncias@urbalert.local">denuncias@urbalert.local</a></p>
+            </div>
+
+            <div class="p-4 bg-gray-50 rounded shadow">
+                <p class="font-bold">Línea de Atención</p>
+                <p class="text-sm text-gray-600">Atención 24/7</p>
+                <p class="mt-2"><strong>Tel:</strong> <a href="tel:+34600000003">+34 600 000 003</a></p>
+                <p><strong>Email:</strong> <a href="mailto:atencion@urbalert.local">atencion@urbalert.local</a></p>
+            </div>
+        </div>
+    </section>
+  </main>
+
+  <footer class="text-center py-6 text-white bg-red-600">© 2026 Urbalert</footer>
+
+  <script>
+    const denunciasIniciales = [
+      { nombre: "Anónimo", categoria: "Acoso", comentario: "Hay acoso en la zona de trabajo.", fecha: "2024-12-01T10:00:00Z" },
+      { nombre: "María L.", categoria: "Corrupción", comentario: "Se detectó corrupción en la administración.", fecha: "2024-12-05T12:00:00Z" },
+    ];
+
+    function cargarDenuncias(){
+      const cont = document.getElementById('lista-denuncias');
+      cont.innerHTML = '';
+      const guardadas = JSON.parse(localStorage.getItem('denuncias') || '[]');
+      const todas = [...denunciasIniciales, ...guardadas];
+      todas.forEach(d=>{
+        const fechaStr = new Date(d.fecha).toLocaleDateString();
+        const el = document.createElement('div');
+        el.className = 'p-4 bg-white rounded shadow';
+        el.innerHTML = `<p class="font-bold">${d.nombre||'Anónimo'} <span class="text-sm text-gray-500">(${fechaStr})</span></p><p class="text-sm text-gray-600"><strong>Categoría:</strong> ${d.categoria}</p><p>${d.comentario||d.descripcion||''}</p>`;
+        cont.appendChild(el);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', ()=>{
+      const form = document.getElementById('form-denuncia');
+      form.addEventListener('submit', function(e){
+        e.preventDefault();
+        const nombre = document.getElementById('titulo').value || '';
+        const comentario = document.getElementById('descripcion').value || '';
+        const categoria = document.getElementById('categoria').value || '';
+        const fecha = new Date().toISOString();
+        const nueva = { nombre, comentario, categoria, fecha };
+        const arr = JSON.parse(localStorage.getItem('denuncias') || '[]');
+        arr.push(nueva);
+        localStorage.setItem('denuncias', JSON.stringify(arr));
+        document.getElementById('mensaje').innerText = '¡Denuncia guardada localmente!';
+        form.reset();
+        cargarDenuncias();
+      });
+
+      cargarDenuncias();
+    });
+  </script>
+</body>
+</html>
