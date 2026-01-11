@@ -12,7 +12,6 @@
 <body>
 
 <header>
-    <h1>Urbalert</h1>
     <h1>
         <a href="/" style="color: white; text-decoration: none;">
             Urbalert
