@@ -1,11 +1,8 @@
 import './bootstrap';
 
-/**
- * Cargar listado de denuncias
- */
 function cargarDenuncias() {
     const tbody = document.getElementById('denuncias-body');
-    if (!tbody) return; // no estamos en el index
+    if (!tbody) return;
 
     fetch('/api/denuncias')
         .then(response => {
@@ -51,9 +48,36 @@ function cargarDenuncias() {
         });
 }
 
-/**
- * Crear nueva denuncia
- */
+function cargarDetalleDenuncia() {
+    const container = document.getElementById('detalle-denuncia');
+    if (!container) return;
+
+    const id = container.dataset.id;
+
+    fetch(`/api/denuncias/${id}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Denuncia no encontrada');
+            }
+            return response.json();
+        })
+        .then(result => {
+            const d = result.data;
+
+            container.innerHTML = `
+                <p><strong>Título:</strong> ${d.titulo}</p>
+                <p><strong>Descripción:</strong> ${d.descripcion}</p>
+                <p><strong>Categoría:</strong> ${d.categoria}</p>
+                <p><strong>Ubicación:</strong> ${d.ubicacion}</p>
+                <p><strong>Estado:</strong> ${d.estado}</p>
+            `;
+        })
+        .catch(() => {
+            container.innerHTML =
+                '<p>No se pudo cargar la información de la denuncia.</p>';
+        });
+}
+
 function crearDenuncia() {
     const form = document.getElementById('denuncia-form');
     if (!form) return; 
@@ -101,10 +125,8 @@ function crearDenuncia() {
     });
 }
 
-/**
- * Inicialización general
- */
 document.addEventListener('DOMContentLoaded', () => {
     cargarDenuncias();
     crearDenuncia();
+    cargarDetalleDenuncia();
 });
