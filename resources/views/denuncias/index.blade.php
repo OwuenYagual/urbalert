@@ -23,5 +23,5 @@
                 <td colspan="4">Cargando denuncias...</td>
             </tr>
         </tbody>
-    </table>
+    </table>    
 @endsection
