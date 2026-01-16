@@ -34,6 +34,9 @@ function cargarDenuncias() {
                         <a href="/denuncias/${d.id}" class="btn">
                             Ver detalle
                         </a>
+                        <button class="btn btn-delete" onclick="eliminarDenuncia(${d.id})">
+                            Eliminar
+                        </button>
                     </td>
                 `;
                 tbody.appendChild(row);
@@ -111,7 +114,7 @@ function crearDenuncia() {
                 '<p style="color: green;">Denuncia registrada correctamente. Redirigiendo...</p>';
 
             setTimeout(() => {
-                window.location.href = '/';
+                window.location.href = '/denuncias';
             }, 800);
         })
         .catch(error => {
@@ -124,6 +127,39 @@ function crearDenuncia() {
         });
     });
 }
+
+function eliminarDenuncia(id) {
+    if (!confirm('¿Estás seguro de que deseas eliminar esta denuncia?')) {
+        return;
+    }
+
+    fetch(`/api/denuncias/${id}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        }
+    })
+    .then(response => {
+        console.log('Response status:', response.status);
+        if (!response.ok) {
+            throw new Error(`Error HTTP! status: ${response.status}`);
+        }
+        return response.text().then(text => text ? JSON.parse(text) : {});
+    })
+    .then(data => {
+        console.log('Success:', data);
+        alert('Denuncia eliminada correctamente.');
+        cargarDenuncias();
+    })
+    .catch(error => {
+        console.error('Error completo:', error);
+        alert('Error al eliminar la denuncia: ' + error.message);
+    });
+}
+
+// Hacer la función disponible globalmente
+window.eliminarDenuncia = eliminarDenuncia;
 
 document.addEventListener('DOMContentLoaded', () => {
     cargarDenuncias();

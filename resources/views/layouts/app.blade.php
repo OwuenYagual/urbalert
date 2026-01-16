@@ -18,7 +18,8 @@
         </a>
     </h1>
     <nav>
-        <a href="/">Denuncias</a>
+        <a href="/">Inicio</a>
+        <a href="/denuncias">Denuncias</a>
         <a href="/denuncias/crear">Registrar denuncia</a>
     </nav>
 </header>

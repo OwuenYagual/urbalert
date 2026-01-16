@@ -3,6 +3,10 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
+    return view('inicio');
+});
+
+Route::get('/denuncias', function () {
     return view('denuncias.index');
 });
 
