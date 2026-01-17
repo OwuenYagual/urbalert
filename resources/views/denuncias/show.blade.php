@@ -10,6 +10,6 @@
     </div>
 
     <div style="margin-top: 20px;">
-        <a href="/" class="btn">Volver al listado</a>
+        <a href="/denuncias" class="btn">Volver al listado</a>
     </div>
 @endsection

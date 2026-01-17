@@ -85,4 +85,25 @@ class DenunciaController extends Controller
         ], 200);
     }
 
+    public function update(int $id, \Illuminate\Http\Request $request): JsonResponse
+    {
+        $denuncia = Denuncia::find($id);
+
+        if (!$denuncia) {
+            return response()->json([
+                'message' => 'Denuncia no encontrada.'
+            ], 404);
+        }
+
+        if ($request->has('estado')) {
+            $denuncia->estado = $request->estado;
+            $denuncia->save();
+        }
+
+        return response()->json([
+            'message' => 'Denuncia actualizada correctamente.',
+            'data' => $denuncia
+        ], 200);
+    }
+
 }

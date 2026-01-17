@@ -247,3 +247,252 @@ th {
 .btn-secondary:hover {
     background-color: #4b5563;
 }
+
+/* Estilos para las tarjetas de denuncias en grid */
+.denuncias-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.denuncia-card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.denuncia-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.denuncia-categoria {
+    background-color: #dbeafe;
+    color: #1e40af;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    display: inline-block;
+    margin-bottom: 12px;
+    width: fit-content;
+}
+
+.denuncia-card h3 {
+    margin: 0 0 12px 0;
+    color: #1f2937;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.denuncia-ubicacion {
+    margin: 12px 0;
+    color: #6b7280;
+    font-size: 14px;
+}
+
+.denuncia-descripcion {
+    color: #374151;
+    font-size: 14px;
+    line-height: 1.5;
+    flex-grow: 1;
+    margin: 12px 0;
+}
+
+.denuncia-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+    padding-top: 12px;
+    border-top: 1px solid #e5e7eb;
+}
+
+.denuncia-footer .fecha {
+    color: #9ca3af;
+    font-size: 12px;
+}
+
+.estado {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.estado-pendiente {
+    background-color: #fee2e2;
+    color: #991b1b;
+}
+
+.estado-en_investigación {
+    background-color: #fef08a;
+    color: #92400e;
+}
+
+.estado-resuelto {
+    background-color: #dcfce7;
+    color: #166534;
+}
+
+.estado-rechazado {
+    background-color: #f3e8ff;
+    color: #6b21a8;
+}
+
+/* Estilos para el modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    animation: fadeIn 0.3s ease;
+}
+
+.modal.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.modal-content {
+    background-color: #ffffff;
+    padding: 28px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 600px;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    animation: slideUp 0.3s ease;
+    position: relative;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #6b7280;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+}
+
+.modal-close:hover {
+    background-color: #f3f4f6;
+    color: #1f2937;
+}
+
+.modal-detalle-titulo {
+    margin-top: 0;
+    margin-bottom: 24px;
+    color: #1f2937;
+    font-size: 24px;
+    padding-right: 32px;
+}
+
+.modal-detalle-seccion {
+    margin-bottom: 20px;
+}
+
+.modal-detalle-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #6b7280;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+}
+
+.modal-detalle-valor {
+    color: #1f2937;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.modal-detalle-badge {
+    background-color: #dbeafe;
+    color: #1e40af;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.modal-detalle-acciones {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid #e5e7eb;
+}
+
+.modal-detalle-acciones a,
+.modal-detalle-acciones button {
+    flex: 1;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .denuncias-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .modal-content {
+        width: 95%;
+        max-height: 90vh;
+    }
+
+    .denuncia-card {
+        padding: 16px;
+    }
+
+    .modal-detalle-acciones {
+        flex-direction: column;
+    }
+
+    .modal-detalle-acciones a,
+    .modal-detalle-acciones button {
+        width: 100%;
+    }
+}
