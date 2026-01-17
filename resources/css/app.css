@@ -1,46 +1,89 @@
+/* =============================
+   Layout básico: body, html y main
+============================= */
 html, body {
     height: 100%;
-}
-
-body {
     margin: 0;
+    display: flex;
+    flex-direction: column;
     font-family: Arial, Helvetica, sans-serif;
     background-color: #f4f6f8;
     color: #1f2937;
-    display: flex;
-    flex-direction: column;
 }
 
+/* =============================
+   Header y navegación
+============================= */
+
+/* Header principal */
 header {
-    background-color: #1f2937;
-    color: #ffffff;
-    padding: 16px 24px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 10px 30px;
+    background-color: #0f172a; /* color tipo navy oscuro */
+    color: white;
+    font-family: Arial, sans-serif;
 }
 
-header h1 {
-    margin: 0;
-    font-size: 20px;
-}
-
-nav a {
-    color: #ffffff;
+/* Logo */
+header h1 a {
+    color: white;
     text-decoration: none;
-    margin-left: 16px;
-    font-size: 14px;
+    font-size: 1.5rem;
+    font-weight: bold;
 }
 
-nav a:hover {
-    text-decoration: underline;
+/* Contenedores izquierda y derecha */
+.nav-left, .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* espacio entre enlaces */
 }
 
+/* Enlaces */
+.nav-left a, .nav-right a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background 0.3s, color 0.3s;
+}
+
+/* Efecto hover */
+.nav-left a:hover, .nav-right a:hover {
+    background-color: #1e293b; /* color más claro al pasar mouse */
+}
+
+/* Saludo */
+.nav-left span {
+    font-weight: 500;
+    margin-right: 10px;
+}
+
+/* Responsive: si quieres que se vea bien en móvil */
+@media screen and (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .nav-left, .nav-right {
+        gap: 15px;
+        margin-top: 5px;
+    }
+}
+
+
+
+/* =============================
+   Contenido principal
+============================= */
 main {
+    flex: 1; /* ocupa el espacio restante y empuja footer abajo */
     padding: 24px;
     max-width: 1200px;
     margin: auto;
-    flex: 1;
     width: 100%;
 }
 
@@ -48,15 +91,20 @@ main h2 {
     text-align: center;
 }
 
+/* =============================
+   Footer
+============================= */
 footer {
     background-color: #e5e7eb;
     text-align: center;
     padding: 12px;
     font-size: 13px;
     color: #374151;
-    margin-top: auto;
 }
 
+/* =============================
+   Botones
+============================= */
 .btn {
     display: inline-block;
     padding: 8px 14px;
@@ -68,20 +116,45 @@ footer {
     border: none;
     cursor: pointer;
     margin-right: 6px;
+    margin-top: 10px;
 }
 
 .btn:hover {
     background-color: #1e40af;
 }
 
+.btn-login { background-color: #28a745; color: white; }
+.btn-login:hover { background-color: #1e7e34; }
+
+.btn-register { background-color: #ffc107; color: white; }
+.btn-register:hover { background-color: #e0a800; }
+
 .btn-delete {
     background-color: #dc2626;
 }
-
 .btn-delete:hover {
     background-color: #b91c1c;
 }
 
+.btn-cta {
+    background-color: #374151;
+    margin-right: 12px;
+    margin-bottom: 10px;
+}
+.btn-cta:hover {
+    background-color: #1f2937;
+}
+
+.btn-secondary {
+    background-color: #6b7280;
+}
+.btn-secondary:hover {
+    background-color: #4b5563;
+}
+
+/* =============================
+   Tablas
+============================= */
 table {
     width: 100%;
     max-width: 900px;
@@ -99,7 +172,10 @@ th, td {
 th {
     background-color: #f1f1f1;
 }
-/* Estilos para la página de inicio */
+
+/* =============================
+   Páginas inicio, hero y features
+============================= */
 .inicio-container {
     max-width: 900px;
     margin: 0 auto;
@@ -138,7 +214,7 @@ th {
     background-color: #ffffff;
     padding: 28px;
     border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     border-top: 4px solid #374151;
     text-align: center;
 }
@@ -156,102 +232,12 @@ th {
     margin: 10px 0 0 0;
 }
 
-.emergencias {
-    margin-bottom: 50px;
-}
-
-.emergencias h2 {
-    text-align: center;
-    margin-bottom: 35px;
-    color: #1f2937;
-    font-size: 28px;
-}
-
-.contactos-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-    margin-bottom: 35px;
-}
-
-.contacto-card {
-    padding: 28px;
-    border-radius: 8px;
-    text-align: center;
-    color: white;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-.contacto-card h3 {
-    margin: 0 0 12px 0;
-    font-size: 18px;
-    font-weight: 600;
-}
-
-.contacto-card .numero {
-    font-size: 36px;
-    font-weight: bold;
-    margin: 16px 0;
-    font-family: 'Courier New', monospace;
-}
-
-.contacto-card .descripcion {
-    font-size: 14px;
-    margin: 12px 0 0 0;
-    opacity: 0.9;
-}
-
-.contacto-card.emergencia {
-    background-color: #6b5b4b;
-}
-
-.contacto-card.policia {
-    background-color: #374151;
-}
-
-.contacto-card.bomberos {
-    background-color: #57534e;
-}
-
-.cta {
-    background-color: #f3f4f6;
-    padding: 40px;
-    border-radius: 8px;
-    text-align: center;
-    border-left: 5px solid #1f2937;
-}
-
-.cta h3 {
-    margin-top: 0;
-    color: #1f2937;
-    font-size: 20px;
-    font-weight: 600;
-}
-
-.btn-cta {
-    background-color: #374151;
-    margin-right: 12px;
-    display: inline-block;
-    margin-bottom: 10px;
-}
-
-.btn-cta:hover {
-    background-color: #1f2937;
-}
-
-.btn-secondary {
-    background-color: #6b7280;
-    display: inline-block;
-}
-
-.btn-secondary:hover {
-    background-color: #4b5563;
-}
-
-/* Estilos para las tarjetas de denuncias en grid */
+/* =============================
+   Grid de denuncias
+============================= */
 .denuncias-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(320px,1fr));
     gap: 24px;
     max-width: 1200px;
     margin: 0 auto;
@@ -261,7 +247,7 @@ th {
     background-color: #ffffff;
     border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     padding: 20px;
     display: flex;
@@ -270,7 +256,7 @@ th {
 
 .denuncia-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.15);
 }
 
 .denuncia-categoria {
@@ -320,6 +306,9 @@ th {
     font-size: 12px;
 }
 
+/* =============================
+   Estados de denuncia
+============================= */
 .estado {
     display: inline-block;
     padding: 6px 12px;
@@ -328,36 +317,21 @@ th {
     font-weight: 600;
 }
 
-.estado-pendiente {
-    background-color: #fee2e2;
-    color: #991b1b;
-}
+.estado-pendiente { background-color: #fee2e2; color: #991b1b; }
+.estado-en_investigación { background-color: #fef08a; color: #92400e; }
+.estado-resuelto { background-color: #dcfce7; color: #166534; }
+.estado-rechazado { background-color: #f3e8ff; color: #6b21a8; }
 
-.estado-en_investigación {
-    background-color: #fef08a;
-    color: #92400e;
-}
-
-.estado-resuelto {
-    background-color: #dcfce7;
-    color: #166534;
-}
-
-.estado-rechazado {
-    background-color: #f3e8ff;
-    color: #6b21a8;
-}
-
-/* Estilos para el modal */
+/* =============================
+   Modal
+============================= */
 .modal {
     display: none;
     position: fixed;
     z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0,0,0,0.5);
     animation: fadeIn 0.3s ease;
 }
 
@@ -365,15 +339,6 @@ th {
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
 }
 
 .modal-content {
@@ -384,39 +349,23 @@ th {
     max-width: 600px;
     max-height: 80vh;
     overflow-y: auto;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
     animation: slideUp 0.3s ease;
     position: relative;
 }
 
-@keyframes slideUp {
-    from {
-        transform: translateY(20px);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
 .modal-close {
     position: absolute;
-    top: 16px;
-    right: 16px;
+    top: 16px; right: 16px;
     font-size: 24px;
     font-weight: bold;
     color: #6b7280;
     cursor: pointer;
     background: none;
     border: none;
-    padding: 0;
-    width: 28px;
-    height: 28px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     border-radius: 4px;
+    width: 28px; height: 28px;
+    display: flex; align-items: center; justify-content: center;
 }
 
 .modal-close:hover {
@@ -424,75 +373,155 @@ th {
     color: #1f2937;
 }
 
-.modal-detalle-titulo {
-    margin-top: 0;
-    margin-bottom: 24px;
+/* =============================
+   Responsive
+============================= */
+@media (max-width: 768px) {
+    .denuncias-grid { grid-template-columns: 1fr; }
+    .modal-content { width: 95%; max-height: 90vh; }
+    .denuncia-card { padding: 16px; }
+}
+
+/* =============================
+   Sección de contactos
+============================= */
+.contactos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 35px;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.contacto-card {
+    padding: 28px;
+    border-radius: 8px;
+    text-align: center;
+    color: white; /* si antes era blanco */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.contacto-card h3 {
+    margin: 0 0 12px 0;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.contacto-card .numero {
+    font-size: 36px;
+    font-weight: bold;
+    margin: 16px 0;
+    font-family: 'Courier New', monospace;
+}
+
+.contacto-card .descripcion {
+    font-size: 14px;
+    margin: 12px 0 0 0;
+    opacity: 0.9;
+}
+
+/* Colores específicos según tipo de contacto */
+.contacto-card.emergencia { background-color: #6b5b4b; }
+.contacto-card.policia    { background-color: #374151; }
+.contacto-card.bomberos   { background-color: #57534e; }
+
+/* =============================
+   Formulario de login
+============================= */
+.login-container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.login-container h2 {
+    margin-bottom: 20px;
+    color: #1f2937;
+}
+
+.login-container input {
+    width: 100%;
+    padding: 12px 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.login-container button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    background-color: #2563eb; /* azul botón login */
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.login-container button:hover {
+    background-color: #1e40af;
+}
+
+
+/* =============================
+   Formularios de login y registro
+============================= */
+.auth-container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.auth-container h2 {
+    margin-bottom: 20px;
     color: #1f2937;
     font-size: 24px;
-    padding-right: 32px;
 }
 
-.modal-detalle-seccion {
-    margin-bottom: 20px;
-}
-
-.modal-detalle-label {
-    font-size: 12px;
-    font-weight: 600;
-    color: #6b7280;
-    text-transform: uppercase;
-    margin-bottom: 6px;
-}
-
-.modal-detalle-valor {
-    color: #1f2937;
+.auth-container input {
+    width: 100%;
+    padding: 12px 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
     font-size: 14px;
-    line-height: 1.6;
 }
 
-.modal-detalle-badge {
-    background-color: #dbeafe;
-    color: #1e40af;
-    padding: 6px 12px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: 600;
+.auth-container button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    background-color: #2563eb; /* azul uniforme */
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s;
 }
 
-.modal-detalle-acciones {
-    display: flex;
-    gap: 12px;
-    margin-top: 24px;
-    padding-top: 20px;
-    border-top: 1px solid #e5e7eb;
+.auth-container button:hover {
+    background-color: #1e40af;
 }
 
-.modal-detalle-acciones a,
-.modal-detalle-acciones button {
-    flex: 1;
+.auth-container .alt-action {
+    display: block;
+    margin-top: 12px;
+    font-size: 14px;
+    color: #2563eb;
+    text-decoration: none;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-    .denuncias-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .modal-content {
-        width: 95%;
-        max-height: 90vh;
-    }
-
-    .denuncia-card {
-        padding: 16px;
-    }
-
-    .modal-detalle-acciones {
-        flex-direction: column;
-    }
-
-    .modal-detalle-acciones a,
-    .modal-detalle-acciones button {
-        width: 100%;
-    }
+.auth-container .alt-action:hover {
+    text-decoration: underline;
 }
