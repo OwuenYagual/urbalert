@@ -5,6 +5,15 @@
 @section('content')
 <div class="auth-container">
     <h2>Crear cuenta</h2>
+    @if ($errors->any())
+        <div style="color:#dc2626; background:#fee2e2; padding:10px; border-radius:6px; margin-bottom:12px;">
+            <ul style="margin:0; padding-left:18px;">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 
     <form method="POST" action="{{ route('register') }}">
         @csrf

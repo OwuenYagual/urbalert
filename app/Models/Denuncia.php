@@ -20,4 +20,10 @@ class Denuncia extends Model
         'lng',
         'estado',
     ];
+
+    public function fotos()
+    {
+        return $this->hasMany(\App\Models\DenunciaFoto::class);
+    }
+
 }

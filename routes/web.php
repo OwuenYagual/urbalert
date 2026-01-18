@@ -2,59 +2,21 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Support\Facades\Auth;
 
+// Públicas
+Route::get('/', fn () => view('inicio'));
+Route::get('/denuncias', fn () => view('denuncias.index'));
 
-// Login
-Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
-Route::post('/login', [LoginController::class, 'login']);
-
-// Registro
-Route::get('/register', [RegisterController::class, 'showRegisterForm'])->name('register');
-Route::post('/register', [RegisterController::class, 'register']);
-
-Route::post('/logout', function () {
-    Auth::logout();
-    return redirect('/'); // redirige a página principal
-})->name('logout');
-/*
-|--------------------------------------------------------------------------
-| Públicas
-|--------------------------------------------------------------------------
-*/
-
-Route::get('/', function () {
-    return view('inicio');
-});
-
-Route::get('/denuncias', function () {
-    return view('denuncias.index');
-});
-
-/*
-|--------------------------------------------------------------------------
-| Crear denuncia (ANTES del {id})
-|--------------------------------------------------------------------------
-*/
-
-Route::get('/denuncias/crear', function () {
-    return view('denuncias.create');
-})->middleware('auth');
-
-/*
-|--------------------------------------------------------------------------
-| Detalle (SIEMPRE AL FINAL)
-|--------------------------------------------------------------------------
-*/
-
-Route::get('/denuncias/{id}', function ($id) {
-    return view('denuncias.show', compact('id'));
-});
-Route::get('/login', function () {
-    return view('auth.login');
-})->name('login');
-
+// Auth (único)
+Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 
+Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
+Route::post('/register', [AuthController::class, 'register']);
+
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
+
+// Protegidas
+Route::get('/denuncias/crear', fn () => view('denuncias.create'))->middleware('auth');
+Route::get('/denuncias/{id}', fn ($id) => view('denuncias.show', compact('id')))->middleware('auth');

@@ -49,6 +49,9 @@ class StoreDenunciaRequest extends FormRequest
             'lat' => ['required', 'numeric', 'between:-90,90'],
             'lng' => ['required', 'numeric', 'between:-180,180'],
 
+            'evidencias' => ['nullable','array','min:1','max:5'],
+            'evidencias.*' => ['image','mimes:jpg,jpeg,png,webp','max:4096'],
+
         ];
     }
 

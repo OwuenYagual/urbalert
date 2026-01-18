@@ -7,6 +7,7 @@
         <h2 style="text-align: center;">Registrar nueva denuncia</h2>
 
         <form id="denuncia-form" style="margin-top: 16px;">
+            @csrf
             <div style="margin-bottom: 12px;">
                 <label for="titulo">Título</label><br>
                 <input
@@ -68,6 +69,13 @@
             <input type="hidden" id="ubicacion" name="ubicacion">
             <input type="hidden" id="lat" name="lat">
             <input type="hidden" id="lng" name="lng">
+
+            <div style="margin-bottom: 12px;">
+                <label for="evidencias">Fotos de evidencia (opcional)</label><br>
+                <input type="file" id="evidencias" name="evidencias[]" accept="image/*" multiple>
+                <small style="color:#555;">Puedes subir de 1 a 5 fotos (JPG/PNG/WEBP, máx 4MB c/u).</small>
+            </div>
+
 
             <div style="margin-top: 16px; text-align: center;">
                 <button type="submit" class="btn">Enviar denuncia</button>

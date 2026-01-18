@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 
 class DenunciaController extends Controller
 {
-    // Crear denuncia
+    // Crear denuncia (con múltiples evidencias)
     public function store(StoreDenunciaRequest $request): JsonResponse
     {
         $denuncia = Denuncia::create([
@@ -23,26 +23,39 @@ class DenunciaController extends Controller
             'estado' => 'pendiente',
         ]);
 
+        if ($request->hasFile('evidencias')) {
+            foreach ($request->file('evidencias') as $file) {
+                $path = $file->store('denuncias', 'public');
+
+                $denuncia->fotos()->create([
+                    'path' => $path,
+                ]);
+            }
+        }
+
+        // Cargar relación de fotos para devolverlas en la respuesta
+        $denuncia->load('fotos');
+
         return response()->json([
             'message' => 'Denuncia registrada correctamente.',
             'data' => $denuncia,
         ], 201);
     }
 
-    // Listar todas las denuncias
+    // Listar todas las denuncias (incluye fotos)
     public function index(): JsonResponse
     {
-        $denuncias = Denuncia::orderBy('created_at', 'desc')->get();
+        $denuncias = Denuncia::with('fotos')->orderBy('created_at', 'desc')->get();
 
         return response()->json([
             'data' => $denuncias
         ], 200);
     }
 
-    // Mostrar una denuncia
+    // Mostrar una denuncia específica (incluye fotos)
     public function show(int $id): JsonResponse
     {
-        $denuncia = Denuncia::find($id);
+        $denuncia = Denuncia::with('fotos')->find($id);
 
         if (!$denuncia) {
             return response()->json([
@@ -55,7 +68,7 @@ class DenunciaController extends Controller
         ], 200);
     }
 
-    // Eliminar denuncia
+    // Eliminar denuncia (las fotos en BD se eliminan por cascade; archivos quedan en storage si no los borras)
     public function destroy(int $id): JsonResponse
     {
         $denuncia = Denuncia::find($id);
@@ -73,7 +86,7 @@ class DenunciaController extends Controller
         ], 200);
     }
 
-    // Actualizar estado de denuncia
+    // Actualizar estado de denuncia (PATCH)
     public function updateEstado(UpdateDenunciaEstadoRequest $request, int $id): JsonResponse
     {
         $denuncia = Denuncia::find($id);
@@ -93,7 +106,7 @@ class DenunciaController extends Controller
         ], 200);
     }
 
-    // Actualizar datos de denuncia
+    // (Opcional) Actualizar datos de denuncia - si no lo estás usando, elimínalo para evitar duplicidad
     public function update(int $id, Request $request): JsonResponse
     {
         $denuncia = Denuncia::find($id);
@@ -106,8 +119,9 @@ class DenunciaController extends Controller
 
         if ($request->has('estado')) {
             $denuncia->estado = $request->estado;
-            $denuncia->save();
         }
+
+        $denuncia->save();
 
         return response()->json([
             'message' => 'Denuncia actualizada correctamente.',
