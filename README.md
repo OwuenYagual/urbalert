@@ -1,59 +1,133 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<h1 align="center">UrbAlert</h1>
+<p align="center"><strong>Plataforma de denuncias ciudadanas</strong></p>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+---
+ 
+<h2 align="center">Acerca de UrbAlert</h2>
 
-## About Laravel
+Es una plataforma de  denuncias para la comunidad, desarrollada en "Laravel". Este proyecto permite a la ciudadanía registrar, visualizar y  editar denuncias.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+La plataforma cuenta con un sistema de autenticación, que permite visualizar las denuncias sin necesidad de iniciar sesión. Sin embargo, para registrar una denuncia se debe iniciar sesion y la misma solo podra ser editada por el usuario que realizo la denuncia.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Como funciones extra, se pueden añadir imágenes a la denuncia para respaldar la información e incluir la dirección del suceso para su seguimiento.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+<h2 align="center">Tecnologías utilizadas</h2>
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+- Blade Templates (Laravel)
+- sqlite3 || 3.50.3 
+- PHP || 8.4.16
+- Laravel || 12.47.0
+- Composer || 2.9.3
+- Vite || 7.3.1
+- npm  || 11.6.2
+- Node || 24.12.0
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+---
 
-## Laravel Sponsors
+<h2 align="center">Requisitos minimos</h2>
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+- V. PHP >= 8.1
+- Composer Composer >= 2.0
+- Node.js >= 18
+- npm  >= 9
+- Sqlite 3
+- Git 
 
-### Premium Partners
+---
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+<h2 align="center">¿Como ejecutar el programa?</h2>
 
-## Contributing
+1. Clonamos el repositorio
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+git clone https://github.com/OwuenYagual/urbalert
+cd urbalert
 
-## Code of Conduct
+2. Configuramos los archivos necesarios
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+2.1 Archivo .env
 
-## Security Vulnerabilities
+- Configuramos el archivo .env, verificamos las variables:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+APP_NAME=UrbAlert
+APP_ENV=local
+APP_DEBUG=true
+APP_URL=http://127.0.0.1:8000
 
-## License
+DB_CONNECTION=sqlite
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- Creamos la base de datos
+touch database/database.sqlite
+
+- Creamos la key
+php artisan key:generate
+
+
+
+3. Abrimos dos terminales
+
+3.1 En el primer terminal usamos composer y php
+
+composer install
+php artisan migrate
+
+3.2 En el segundo terminal usamos npm
+
+npm install
+npm run dev
+
+3.3 Volvemos al primer terminal y ejecutamos
+php artisan serve
+
+4. Ingresa a la dirección http://127.0.0.1:8000
+
+5. Nos desplazamos entre las vistas de la plataforma
+
+---
+
+<h2 align="center">Vista previa</h2>
+
+#### Login
+![Login](public/images/login.png)
+#### Inicio
+![Inicio](public/images/inicio.png)
+#### Denuncias
+![Denuncias](public/images/denuncias.png)
+#### Vista detallada
+![Vista detallada denuncias](public/images/detalle_denuncia.png)
+#### Registrar denuncias
+![Registrar denuncias](public/images/registrar_denuncias1.png)
+
+
+---
+
+<h2 align="center">Pruebas</h2>
+
+1. Iniciar sesion
+2. Registrar sesion
+3. Observar denuncias
+4. Registrar denuncia
+5. Editar denuncia
+6. Cerrar sesion
+
+---
+
+<h2 align="center">Secciones mas importantes</h2>
+
+routes/web.php -> Rutas del sistema
+resources/views -> Se encuentran los .blade.php
+app/Http/Controllers-> Se encuentrar los archivos Controllers
+
+
+---
+
+<h2 align="center">Autores</h2>
+
+- **Owen Yagual**  
+  <sub>Estudiante de Ingeniería en Computación</sub>
+
+- **Andrés Eduardo Pino González**  
+  <sub>Estudiante de Ingeniería en Computación</sub>
+
+
