@@ -16,6 +16,8 @@ class DenunciaController extends Controller
             'descripcion' => $request->descripcion,
             'categoria' => $request->categoria,
             'ubicacion' => $request->ubicacion,
+            'lat' => $request->lat,
+            'lng' => $request->lng,
             'estado' => 'pendiente',
         ]);
 

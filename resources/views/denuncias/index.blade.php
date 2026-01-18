@@ -8,6 +8,8 @@
     <div style="margin-bottom: 16px;">
         <a href="/denuncias/crear" class="btn">Registrar nueva denuncia</a>
     </div>
+    
+    <div id="mensaje-global" style="margin: 12px 0;"></div>
 
     <table>
         <thead>

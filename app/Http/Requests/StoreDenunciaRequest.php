@@ -46,6 +46,9 @@ class StoreDenunciaRequest extends FormRequest
             ],
 
             'ubicacion' => ['required', 'string', 'min:3', 'max:160'],
+            'lat' => ['required', 'numeric', 'between:-90,90'],
+            'lng' => ['required', 'numeric', 'between:-180,180'],
+
         ];
     }
 

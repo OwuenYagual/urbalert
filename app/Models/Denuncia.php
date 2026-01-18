@@ -16,6 +16,8 @@ class Denuncia extends Model
         'descripcion',
         'categoria',
         'ubicacion',
+        'lat',
+        'lng',
         'estado',
     ];
 }

@@ -35,5 +35,9 @@
 {{-- Espacio para scripts adicionales por vista --}}
 @yield('scripts')
 
+<script async src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY') }}&libraries=places" defer></script>
+
+
+
 </body>
 </html>

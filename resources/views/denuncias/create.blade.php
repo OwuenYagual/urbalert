@@ -46,16 +46,28 @@
                 </select>
             </div>
 
+            {{-- Buscador --}}
             <div style="margin-bottom: 12px;">
-                <label for="ubicacion">Ubicación</label><br>
+                <label for="buscador-direccion">Buscar ubicación</label><br>
                 <input
                     type="text"
-                    id="ubicacion"
-                    name="ubicacion"
-                    required
-                    style="width: 100%; padding: 8px; box-sizing: border-box;"
+                    id="buscador-direccion"
+                    placeholder="Escribe una dirección o lugar..."
+                    style="width: 100%; padding: 8px;"
+                    autocomplete="off"
                 >
+                <small style="color:#555;">Selecciona una sugerencia o marca el punto en el mapa.</small>
             </div>
+
+            {{-- Mapa --}}
+            <div style="margin-bottom: 12px;">
+                <div id="map" style="width: 100%; height: 320px; border: 1px solid #ddd; border-radius: 6px;"></div>
+            </div>
+
+            {{-- Campos ocultos (los que irán al backend) --}}
+            <input type="hidden" id="ubicacion" name="ubicacion">
+            <input type="hidden" id="lat" name="lat">
+            <input type="hidden" id="lng" name="lng">
 
             <div style="margin-top: 16px; text-align: center;">
                 <button type="submit" class="btn">Enviar denuncia</button>
