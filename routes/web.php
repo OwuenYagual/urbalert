@@ -20,3 +20,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middl
 // Protegidas
 Route::get('/denuncias/crear', fn () => view('denuncias.create'))->middleware('auth');
 Route::get('/denuncias/{id}', fn ($id) => view('denuncias.show', compact('id')))->middleware('auth');
+
+Route::get('/denuncias/{id}/editar', function ($id) {
+    return view('denuncias.edit', compact('id'));
+})->middleware('auth');

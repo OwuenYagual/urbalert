@@ -14,6 +14,7 @@ class DenunciaController extends Controller
     public function store(StoreDenunciaRequest $request): JsonResponse
     {
         $denuncia = Denuncia::create([
+            'user_id' => auth()->id(),
             'titulo' => $request->titulo,
             'descripcion' => $request->descripcion,
             'categoria' => $request->categoria,
@@ -45,11 +46,11 @@ class DenunciaController extends Controller
     // Listar todas las denuncias (incluye fotos)
     public function index(): JsonResponse
     {
-        $denuncias = Denuncia::with('fotos')->orderBy('created_at', 'desc')->get();
+        $denuncias = Denuncia::with('fotos')
+            ->orderBy('created_at', 'desc')
+            ->get();
 
-        return response()->json([
-            'data' => $denuncias
-        ], 200);
+        return response()->json(['data' => $denuncias], 200);
     }
 
     // Mostrar una denuncia específica (incluye fotos)
@@ -58,44 +59,26 @@ class DenunciaController extends Controller
         $denuncia = Denuncia::with('fotos')->find($id);
 
         if (!$denuncia) {
-            return response()->json([
-                'message' => 'Denuncia no encontrada.'
-            ], 404);
+            return response()->json(['message' => 'Denuncia no encontrada.'], 404);
         }
 
-        return response()->json([
-            'data' => $denuncia
-        ], 200);
+        return response()->json(['data' => $denuncia], 200);
     }
 
-    // Eliminar denuncia (las fotos en BD se eliminan por cascade; archivos quedan en storage si no los borras)
     public function destroy(int $id): JsonResponse
     {
-        $denuncia = Denuncia::find($id);
-
-        if (!$denuncia) {
-            return response()->json([
-                'message' => 'Denuncia no encontrada.'
-            ], 404);
-        }
+        $denuncia = Denuncia::findOrFail($id);
+        $this->authorize('delete', $denuncia);
 
         $denuncia->delete();
 
-        return response()->json([
-            'message' => 'Denuncia eliminada correctamente.'
-        ], 200);
+        return response()->json(['message' => 'Denuncia eliminada correctamente.'], 200);
     }
 
-    // Actualizar estado de denuncia (PATCH)
     public function updateEstado(UpdateDenunciaEstadoRequest $request, int $id): JsonResponse
     {
-        $denuncia = Denuncia::find($id);
-
-        if (!$denuncia) {
-            return response()->json([
-                'message' => 'Denuncia no encontrada.'
-            ], 404);
-        }
+        $denuncia = Denuncia::findOrFail($id);
+        $this->authorize('updateEstado', $denuncia);
 
         $denuncia->estado = $request->estado;
         $denuncia->save();
@@ -106,26 +89,33 @@ class DenunciaController extends Controller
         ], 200);
     }
 
-    // (Opcional) Actualizar datos de denuncia - si no lo estás usando, elimínalo para evitar duplicidad
     public function update(int $id, Request $request): JsonResponse
     {
-        $denuncia = Denuncia::find($id);
+        $denuncia = Denuncia::findOrFail($id);
 
-        if (!$denuncia) {
-            return response()->json([
-                'message' => 'Denuncia no encontrada.'
-            ], 404);
-        }
+        // IMPORTANTE: aquí se aplica la Policy (dueño o admin)
+        $this->authorize('update', $denuncia);
 
-        if ($request->has('estado')) {
-            $denuncia->estado = $request->estado;
-        }
+        // usuario normal NO puede cambiar estado por este endpoint
+        $request->request->remove('estado');
 
+        $denuncia->fill($request->only([
+            'titulo', 'descripcion', 'categoria', 'ubicacion', 'lat', 'lng'
+        ]));
         $denuncia->save();
+
+        // subir nuevas evidencias (se agregan, no reemplazan)
+        if ($request->hasFile('evidencias')) {
+            foreach ($request->file('evidencias') as $file) {
+                $path = $file->store('denuncias', 'public');
+                $denuncia->fotos()->create(['path' => $path]);
+            }
+        }
 
         return response()->json([
             'message' => 'Denuncia actualizada correctamente.',
-            'data' => $denuncia
+            'data' => $denuncia->load('fotos'),
         ], 200);
     }
+
 }

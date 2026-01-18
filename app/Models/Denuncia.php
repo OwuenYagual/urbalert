@@ -12,6 +12,7 @@ class Denuncia extends Model
     protected $table = 'denuncias';
 
     protected $fillable = [
+        'user_id',
         'titulo',
         'descripcion',
         'categoria',
@@ -25,5 +26,11 @@ class Denuncia extends Model
     {
         return $this->hasMany(\App\Models\DenunciaFoto::class);
     }
+
+    public function user()
+    {
+        return $this->belongsTo(\App\Models\User::class);
+    }
+
 
 }
