@@ -28,6 +28,13 @@
             </div>
         </section>
 
+        <section style="margin-top: 50px;">
+            <h2 style="text-align: center; margin-bottom: 35px; color: #1f2937; font-size: 28px;">Últimas Denuncias</h2>
+            <div class="denuncias-grid" id="denuncias-inicio-container">
+                <p style="text-align: center; grid-column: 1 / -1;">Cargando denuncias...</p>
+            </div>
+        </section>
+
         <section class="emergencias">
             <h2>Contactos de Emergencia</h2>
             <div class="contactos-grid">
@@ -49,10 +56,12 @@
             </div>
         </section>
 
-        <section class="cta">
-            <h3>¿Necesitas reportar algo?</h3>
-            <a href="/denuncias/crear" class="btn btn-cta">Registrar Denuncia</a>
-            <a href="/denuncias" class="btn btn-secondary">Ver Denuncias</a>
-        </section>
+        <!-- Modal para ver detalles -->
+        <div id="modal-detalle" class="modal">
+            <div class="modal-content">
+                <button class="modal-close" onclick="cerrarModal()">×</button>
+                <div id="detalle-contenido"></div>
+            </div>
+        </div>
     </div>
 @endsection
