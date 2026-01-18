@@ -105,7 +105,7 @@ php artisan serve
 <h2 align="center">Pruebas</h2>
 
 1. Iniciar sesion
-2. Registrar sesion
+2. Registrar usuario
 3. Observar denuncias
 4. Registrar denuncia
 5. Editar denuncia
@@ -116,8 +116,11 @@ php artisan serve
 <h2 align="center">Secciones mas importantes</h2>
 
 routes/web.php -> Rutas del sistema
+
 resources/views -> Se encuentran los .blade.php
-app/Http/Controllers-> Se encuentrar los archivos Controllers
+
+
+app/Http/Controllers -> Se encuentrar los archivos Controllers
 
 
 ---
